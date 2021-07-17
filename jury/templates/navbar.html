@@ -12,37 +12,51 @@
 </head>
 
 <body id="navbar">
-  <div class="row d-flex align-items-center">
-    <div class="col-md-2 bg-light text-center">
-      <p>ENGLISH</p>
+  <div>
+    <div class="row d-flex align-items-center">
+      <div class="col-md-2 bg-light text-center">
+        <p>ENGLISH</p>
+      </div>
+      <div class="col-md-8 bg-white">
+        <p class="text-center">Get rated By your Peers, Know where you Stand</p>
+      </div>
+      <div class="col-md-2 bg-light" id="social_icons">
+        <span class="facebook_icon"><img src="../static/images/facebook.png" alt="facebook"></span>
+        <span class="instagram_icon"><img src="../static/images/instagram.png" alt="instagram"></span>
+        <span class="twitter_icon"><img src="../static/images/twitter_icon.png" alt="twitter"></span>
+      </div>
     </div>
-    <div class="col-md-8 bg-white">
-      <p class="text-center">Get rated By your Peers, Know where you Stand</p>
+    <hr>
+    <div class="row navbar2">
+      <div class="col-md-4">
+        <button class="btn btn-default col-md-2">MENU</button>
+        <form action="" class='inline-form col-md-2'>
+          <input type="text" name="" id="">
+          <button type="submit" class="btn btn-outline-success">Search</button>
+        </form>
+      </div>
+      <div class="col-md-4 text-center"><span class="web_title navbar-brand text-center"><a href="/">The Jury</a></span>
+      </div>
+      <div class="col-md-4 content_navbar">
+        {% if request.user.is_authenticated %}
+        <button class="btn btn-outline-success">{{request.user.username}}</button>
+        <a href="{% url 'logout' %}">
+          <p class="bold mr-3 mt-3 text-center"> | Logout | </p>
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}" class="nav-link ml-auto">REGISTER / LOGIN</a>
+        {%endif%}
+        <button class="btn btn-success">SUBMIT YOUR PROJECT</button>
+      </div>
     </div>
-    <div class="col-md-2 bg-light" id="social_icons">
-      <span class="facebook_icon"><img src="../static/images/facebook.png" alt="facebook"></span>
-      <span class="instagram_icon"><img src="../static/images/instagram.png" alt="instagram"></span>
-      <span class="twitter_icon"><img src="../static/images/twitter_icon.png" alt="twitter"></span>
-    </div>
-  </div><hr>
-  <div class="row navbar2">
-    <div class="col-md-4">
-      <button class="btn btn-default col-md-2">MENU</button>
-      <form action="" class='inline-form col-md-2'>
-        <input type="text" name="" id="">
-        <button type="submit" class="btn btn-outline-success">Search</button>
-      </form>
-    </div>
-    <div class="col-md-4 text-center"><span class="web_title navbar-brand text-center"><a href="/">The Jury</a></span></div>
-    <div class="col-md-4 content_navbar">
-      {% if request.user.is_authenticated %}
-      <button class="btn btn-outline-success">{{request.user.username}}</button>
-      <a href="{% url 'logout' %}"><p class="bold mr-3 mt-3 text-center"> | Logout | </p></a>
-      {% else %}
-      <a href="{% url 'login' %}" class="nav-link ml-auto">REGISTER / LOGIN</a>
-      {%endif%}
-      <button class="btn btn-success">SUBMIT YOUR PROJECT</button>
-    </div>
+  </div>
+  <div class="menu_slide">
+    <a href=""><p>Home</p></a>
+    <a href=""><p>Winners</p></a>
+    <a href=""><p>Contact</p></a>
+    <a href=""><p>About</p></a>
+    <a href=""><p>Profile</p></a>
+    <a href=""><p>Collections</p></a>
   </div>
 </body>
 
