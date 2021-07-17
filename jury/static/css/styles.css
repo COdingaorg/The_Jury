@@ -26,7 +26,7 @@
   font-size: 2em;
 }
 .bold{
-  font-weight: 400;
+  font-weight: 600;
 }
 .container-md-fluid{
   width: 98vw;
@@ -75,7 +75,18 @@ h1{
   height: 26px;
   border-radius: 50px;
 }
-
+.navbar2{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: auto;
+}
+.content_navbar{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
 /*styling register page */
 form.register_form>p{
   margin-bottom: 3px;
@@ -108,12 +119,18 @@ form.register_form>p{
   border-radius: 5px 0px 0px 5px;
   border-right:1px solid white
 }
+form.form_real>a{
+  color: white;
+}
 .form_text{
   height: 100%;
   color: black;
 }
 .form_text>h3{
   font-weight: bold;
+}
+.form_text>h3{
+  color: white;
 }
 .form_text>p{
   font-size: 1em;

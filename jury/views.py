@@ -24,8 +24,8 @@ def register_user(request):
       form.save()
       
       to_login = authenticate(username = uname , password = password )
-      login(to_login)
-      
+      login(request, to_login)
+
       messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
       return redirect('/')
     else:
