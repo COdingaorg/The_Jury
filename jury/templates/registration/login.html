@@ -9,7 +9,7 @@
     {{field.errors}}
 
     <div class="col-md-6 form_real">
-      <form action="" method="POST" class="col-md-6 register_form">
+      <form action="{% url 'login' %}" method="POST" class="col-md-6 register_form">
         {%csrf_token%}
         <h3 class="text-center">Login</h3>
         <hr>
