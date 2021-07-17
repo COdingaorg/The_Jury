@@ -3,24 +3,39 @@
 <div class="register_bg">
   <div class="overlay">
     <div class="col-md-3"></div>
-
+    {% for message in messages %}
+    <p class="alert alert-warning">{{message}}</p>
+    {% endfor%}
+    {{field.errors}}
     <div class="col-md-6 form_real">
-      <form action="" method="POST" class="col-md-6 register_form">
+      <form action="{% url 'register_user' %}" class="col-md-6 register_form" method="POST">
         {%csrf_token%}
         <h3 class="text-center">Register</h3>
         <hr>
         <p class='bold'>{{form.username.label}}:</p>
         <p>{{form.username}}</p>
+        {{form.username.errors}}
+
         <p class='bold'>{{form.first_name.label}}:</p>
         <p>{{form.first_name}}</p>
+        {{form.first_name.errors}}
+
         <p class='bold'>{{form.last_name.label}}:</p>
         <p>{{form.last_name}}</p>
+        {{form.last_name.errors}}
+
         <p class='bold'>{{form.email.label}}:</p>
         <p>{{form.email}}</p>
+        {{form.email.errors}}
+
         <p class='bold'>{{form.password1.label}}:</p>
         <p>{{form.password1}}</p>
+        {{form.password.errors}}
+
         <p class='bold'>{{form.password2.label}}:</p>
         <p>{{form.password2}}</p>
+        {{form.password2.errors}}
+
         <button type="submit" name="register_new_user" class="btn btn-success m-5"
           id="register_new_user">Register</button>
           <p>Already have an Account? <a href="{% url 'login' %}">Log in</a></p>

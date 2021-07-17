@@ -110,7 +110,7 @@ form.register_form>p{
 }
 .form_text{
   height: 100%;
-  color: white;
+  color: black;
 }
 .form_text>h3{
   font-weight: bold;
@@ -118,15 +118,17 @@ form.register_form>p{
 .form_text>p{
   font-size: 1em;
   padding: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
   font-weight: 400;
   text-align: center;
   border: 1px solid white;
-  color: black;
+  color: white;
 }
 /*styling login form */
-
+input{
+  border: 1px solid grey;
+}
 
 /*Styling home page */
 .proj-of-day{
