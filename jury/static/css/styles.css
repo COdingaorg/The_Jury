@@ -41,6 +41,11 @@ h1{
   justify-content: space-around;
   padding: 5px;
 }
+.nav_img{
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+}
 #social_icons>span>img{
   width: 26px;
   margin-left: 5px;
@@ -168,20 +173,6 @@ input{
   margin-top: 10px;
 }
 
-.card{
-  height: 60vh;
-  padding: 0%;
-}
-.card-image{
-  height: 70%;
-  padding: 0;
-}
-.card-title{
-  height: 20%;
-}
-.card-footer{
-  height: 10%;
-}
 .collect_icon{
   background-color: rgba(0, 0, 0, 0.7);
   border: 1px solid white;
@@ -205,9 +196,49 @@ div.card-image>p#social_icons>span>img{
   background-color: white;
 }
 /*styling profile page */
+.profile_pg{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
 .profile_pg>img{
-  width: 100px;
-  height: 1000px;
+  width: 200px;
+  height: 200px;
   border-radius: 50px;
   border: 4px solid black;
+  margin-left: 50px;
+}
+p.project_description{
+  font-size: .6em;
+}
+.card-image{
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: 1px;
+}
+.card-image>img{
+  height: auto;
+  width: 100%;
+  border-radius: 1px;
+}
+.card-body{
+  max-height: 200px;
+  height: auto;
+  overflow: hidden;
+}
+.card-title{
+  height: 30px;
+  max-height: 50px;
+  overflow: hidden;
+}
+.card-footer{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.card{
+  height: auto;
+  padding: 0%;
 }

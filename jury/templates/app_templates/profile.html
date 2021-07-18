@@ -4,10 +4,9 @@
 
 {% block content%}
 <hr>
-<div class="profile_page row">
-  <div class="col-md-2 bg-light"></div>
-  <div class="col-md-8 row">
-    <div class="profile_pg col-m-6">
+<div class="profile_page d-flex justify-content-center col-md-12 row">
+  <div class="col-md-12 row d-flex justify-content-center">
+    <div class="profile_pg col-md-6">
       <img src="{{user_profile.photo_path.url}}" alt="profile">
     </div>
     <div class="user-details col-md-6 d-flex flex-column align-items-center justify-content-start">
@@ -20,7 +19,7 @@
         </button>
       </div>
       {%endfor%}
-      <div class="user_sam d-flex flex-row align-items-center justify-content-felx-start">
+      <div class="user_sam d-flex flex-row align-items-center justify-content-flex-start">
         <p class="profile_username ml-auto">{{request.user.username}}</p>
         <!--if it is the owner, edit profile, else, follow-->
         {%if user_profile %}
@@ -53,20 +52,25 @@
     <hr>
     <!--Loop posts here-->
 
-    <div class="a_user_post col-md-12">
+    <div class="a_user_post col-md-12 row d-flex align-items-center">
       {% if user_posts %}
-      <div class="d-flex col-md-12 flex-wrap">
+
+      <div class="d-flex col-md-12 justify-content-center flex-wrap">
 
         {% for post in user_posts%}
-        <div class="card col-md-4">
-          <h4 class="card-title text-center">{{post.project_title}}</h4>
+        <div class="card col-md-3 m-2">
+          <div class="card-title">
+            <h4 class=" text-center">{{post.project_title}}</h4>
+          </div>
+          <div class="card-image">
+            <img class="new_post" src="{{post.project_image.url}}" alt="" style="width: 100%;">
+          </div>
           <div class="card-body">
-            <img class="card-image new_post" src="{{post.project_image}}" alt="" style="width: 100%;">
             {% autoescape on %}
-            <p class="text-center">{{post.project_description|safe}}</p>
+            <p class="text-center project_description">{{post.project_description|safe|truncatechars:100}}</p>
             {% endautoescape %}
           </div>
-          <div class="card-footer d-flex align-items-center justify-content-center">
+          <div class="card-footer">
             <a href="{{post.project_link}}"><button type="button" id='add_post_btn'
                 class="p-auto text-center btn btn-outline-success">Visit Site</button>
             </a>
@@ -74,7 +78,9 @@
                                     background-color:rgb(44, 117, 62);
                                     color: white; 
                                     width: auto; 
+                                    max-width: 80px;
                                     height: 10px;
+                                    margin: auto;
                                     display: flex;
                                     align-items: center;
                                     font-size: .8em;
@@ -109,7 +115,6 @@
       {%endif%}
     </div>
   </div>
-  <div class="col-md-2 bg-light"></div>
 </div>
 
 <!--Modal Window-->
