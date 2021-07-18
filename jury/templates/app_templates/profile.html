@@ -3,15 +3,17 @@
 {% load bootstrap3 %}
 
 {% block content%}
-<div class="profile_page row bg-light mt-100 d-flex justify-content-center align-items-center">
+<hr>
+<div class="profile_page row">
   <div class="col-md-2 bg-light"></div>
   <div class="col-md-8 row">
     <div class="profile_pg col-m-3">
-      <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="">
+      <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile">
     </div>
     <div class="user-details col-md-8 d-flex flex-column align-items-center justify-content-start">
       {% for message in messages%}
-      <div class="alert_window create_account_alert alert alert-warning alert-dismissible fade show z-index-4 position-fixed mt-5">
+      <div
+        class="alert_window create_account_alert alert alert-warning alert-dismissible fade show z-index-4 position-fixed mt-5">
         <strong>Warning!</strong>--<p>{{message}}</p>
         <button type="button" data-dismiss="alert" class="bg-primary w-25 h-25 text-center">
           <p class="w-100 h-100" data-toggle="modal" data-target="#exampleModalLong">create</p>
@@ -22,41 +24,24 @@
         <p class="profile_username ml-auto">{{request.user.username}}</p>
         <!--if it is the owner, edit profile, else, follow-->
         {%if user_profile %}
-          {% if request.user.id != user_profile.user.id%}
-          <form action="{% url 'follow_followed' %}" method="POST">
-            {%csrf_token%}
-            <input type="hidden" name="strangeid" value='{{user_profile.user.id}}'>
-            <strong><button type="submit" data-toggle="modal" data-target="#exampleModalLong"
-                class="edit_profile">Follow</button></strong>
-          </form>
-          {%else%}
-          <strong>
-            <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Edit
-              Profile
-            </button>
-          </strong>
-          {%endif%}
-          {%else%}
-          <strong>
-            <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Edit
-              Profile
-            </button>
-          </strong>
-          {%endif%}
+        {% if request.user.id != user_profile.user.id%}
+        <button class="btn btn-default">See Posts</button>
+        {%else%}
+        <strong>
+          <button type="button" class="btn btn-default m-5" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">
+            Edit Profile
+          </button>
+        </strong>
+        {%endif%}
+        {%else%}
+        <strong>
+          <button type="button" class="btn btn-default m-5" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">
+            Add Profile
+          </button>
+        </strong>
+        {%endif%}
+      </div>
 
-        <svg aria-label="Options" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24">
-          <path clip-rule="evenodd"
-            d="M46.7 20.6l-2.1-1.1c-.4-.2-.7-.5-.8-1-.5-1.6-1.1-3.2-1.9-4.7-.2-.4-.3-.8-.1-1.2l.8-2.3c.2-.5 0-1.1-.4-1.5l-2.9-2.9c-.4-.4-1-.5-1.5-.4l-2.3.8c-.4.1-.8.1-1.2-.1-1.4-.8-3-1.5-4.6-1.9-.4-.1-.8-.4-1-.8l-1.1-2.2c-.3-.5-.8-.8-1.3-.8h-4.1c-.6 0-1.1.3-1.3.8l-1.1 2.2c-.2.4-.5.7-1 .8-1.6.5-3.2 1.1-4.6 1.9-.4.2-.8.3-1.2.1l-2.3-.8c-.5-.2-1.1 0-1.5.4L5.9 8.8c-.4.4-.5 1-.4 1.5l.8 2.3c.1.4.1.8-.1 1.2-.8 1.5-1.5 3-1.9 4.7-.1.4-.4.8-.8 1l-2.1 1.1c-.5.3-.8.8-.8 1.3V26c0 .6.3 1.1.8 1.3l2.1 1.1c.4.2.7.5.8 1 .5 1.6 1.1 3.2 1.9 4.7.2.4.3.8.1 1.2l-.8 2.3c-.2.5 0 1.1.4 1.5L8.8 42c.4.4 1 .5 1.5.4l2.3-.8c.4-.1.8-.1 1.2.1 1.4.8 3 1.5 4.6 1.9.4.1.8.4 1 .8l1.1 2.2c.3.5.8.8 1.3.8h4.1c.6 0 1.1-.3 1.3-.8l1.1-2.2c.2-.4.5-.7 1-.8 1.6-.5 3.2-1.1 4.6-1.9.4-.2.8-.3 1.2-.1l2.3.8c.5.2 1.1 0 1.5-.4l2.9-2.9c.4-.4.5-1 .4-1.5l-.8-2.3c-.1-.4-.1-.8.1-1.2.8-1.5 1.5-3 1.9-4.7.1-.4.4-.8.8-1l2.1-1.1c.5-.3.8-.8.8-1.3v-4.1c.4-.5.1-1.1-.4-1.3zM24 41.5c-9.7 0-17.5-7.8-17.5-17.5S14.3 6.5 24 6.5 41.5 14.3 41.5 24 33.7 41.5 24 41.5z"
-            fill-rule="evenodd">
-          </path>
-        </svg>
-      </div>
-      <div class="follow d-flex ">
-        <p class="ml-5">{{user_posts.count}} Posts</p>
-        <p class="pr-4 pl-4">{% if followers %} {{followers.count}}{%else%} 0 {%endif%}Followers
-        </p>
-        <p>{% if followings %} {{followings.count}}{%else%} 0 {%endif%} Following</p>
-      </div>
       <div class="names d-flex flex-row align-items-center ">
         <strong class="ml-auto">{{request.user.first_name}}</strong><strong>{{request.user.last_name}}</strong>
       </div>
@@ -65,14 +50,22 @@
     </div>
     <hr>
     <!--Loop posts here-->
-    {% if user_posts %}
+
     <div class="a_user_post col-md-12">
+      {% if user_posts %}
       <div class="d-flex col-md-12 flex-wrap">
 
         {% for post in user_posts%}
-        <div class="post_selection">
-          <a href="{% url 'open_post' post.id %}"><img src="{{post.image.url}}" class="user_posts"
-              alt="{{post.image_name}}"></a>
+        <div class="card col-md-4">
+          <h4 class="card-title text-center">Upload Your First Project</h4>
+          <div class="card-body">
+            <img class="card-image new_post" src="../../static/images/projects upload.jpeg" alt="" style="width: 100%;">
+            <p class="text-center">Get Feedback and Reviews from Your Peers and Proffessionals.</p>
+          </div>
+          <div class="card-footer d-flex align-items-center justify-content-center">
+            <a href="{% url 'upload_project' %}"><button type="button" id='add_post_btn'
+                class="p-auto text-center btn btn-primary">Add Post</button></a>
+          </div>
         </div>
         {%endfor%}
 
@@ -82,16 +75,17 @@
       {%else%}
       <!--if not posts-->
       <div class="posts_loop bg-light">
-        <p class="text-center alert-info">No posts yet!</p>
+        <p class="text-center alert-info p-2">No posts yet!</p>
         <div class="get_started">
-          <div class="card col-md-4">
-            <h3 class="card-title text-center">Get Started</h3>
+          <div class="card col-md-4 m-4">
+            <h4 class="card-title text-center">Upload Your First Project</h4>
             <div class="card-body">
-              <img class="card-image new_post" src="../../static/images/new_post.jpg" alt="">
-              <p class="text-center">Share your style, moment, opinion, video, skill, art... anything really</p>
+              <img class="card-image new_post" src="../../static/images/projects upload.jpeg" alt=""
+                style="width: 100%;">
+              <p class="text-center">Get Feedback and Reviews from Your Peers and Proffessionals.</p>
             </div>
             <div class="card-footer d-flex align-items-center justify-content-center">
-              <a href="{% url 'create_post' %}"><button type="button" id='add_post_btn'
+              <a href="{% url 'upload_project' %}"><button type="button" id='add_post_btn'
                   class="p-auto text-center btn btn-primary">Add Post</button></a>
             </div>
           </div>
@@ -99,9 +93,8 @@
       </div>
       {%endif%}
     </div>
-    <div class="col-md-2 bg-light"></div>
-
   </div>
+  <div class="col-md-2 bg-light"></div>
 </div>
 
 <!--Modal Window-->
@@ -120,7 +113,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{% url 'profile'%}" method="POST" enctype="multipart/form-data">
+      <form action="" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
         <div class="modal-body">
           <!--Update profile form-->

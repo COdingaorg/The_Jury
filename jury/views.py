@@ -93,3 +93,17 @@ def get_user(request):
     }
     
     return render(request, 'app_templates/search_result.html', context)
+
+#A view function rendering to profile
+def user_profile(request):
+  '''
+  View function that displays to profile page
+  result 1- Adds to profile if none
+  result 2- Edits profile
+  '''
+  title = f'{request.user.username}\'s Profile'
+  context = {
+    'title' :title
+  }
+
+  return render(request, 'app_templates/profile.html', context)
