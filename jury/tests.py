@@ -55,6 +55,14 @@ class TestUserProject(TestCase):
 
     self.assertTrue(len(projects)>0)
 
+  def test_update_proj_desc(self):
+    self.new_project.save_project()
+    new_desc = 'An online application'
+    UserProject.update_description(1, new_desc)
+    UserProject.objects.get(pk = 1).refresh_from_db()
+
+    self.assertTrue((UserProject.objects.get(pk = 1)).project_description == new_desc)
+
 
 
 

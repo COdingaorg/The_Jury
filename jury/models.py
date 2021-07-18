@@ -22,6 +22,11 @@ class UserProject(models.Model):
     projects = cls.objects.filter(project_title__icontains = search_term )
     return projects
 
+  @classmethod
+  def update_description(cls, id, new_desc):
+    to_update = cls.objects.filter(pk = id).update(project_description = new_desc)
+    
+
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'user_profiles/')
   user_bio = models.TextField(max_length=200)
