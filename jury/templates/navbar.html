@@ -35,14 +35,25 @@
           <button type="submit" class="btn btn-outline-success">Search</button>
         </form>
       </div>
-      <div class="col-md-4 text-center"><span class="web_title navbar-brand text-center"><a href="/">The Jury</a></span>
+      <div class="col-md-2 text-center"><span class="web_title navbar-brand text-center"><a href="/">The Jury</a></span>
       </div>
+      {% if request.user.is_authenticated %}
       <div class="col-md-4 content_navbar">
-        {% if request.user.is_authenticated %}
-        <button class="btn btn-outline-success">{{request.user.username}}</button>
-        <a href="{% url 'logout' %}">
-          <p class="bold mr-3 mt-3 text-center"> | Logout | </p>
+        <a class="nav-link dropdown-toggle d-flex flex-row align-items-center" href="#" id="navbarDropdown"
+          role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class="nav_img" src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}"
+            alt="{{request.user}}'s photo">
+          <button class="btn btn-outline-success">{{request.user.username}}</button>
         </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="">Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Posts</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
+        </div>
         {% else %}
         <a href="{% url 'login' %}" class="nav-link ml-auto">REGISTER / LOGIN</a>
         {%endif%}
@@ -50,13 +61,26 @@
       </div>
     </div>
   </div>
+
   <div class="menu_slide">
-    <a href=""><p>Home</p></a>
-    <a href=""><p>Winners</p></a>
-    <a href=""><p>Contact</p></a>
-    <a href=""><p>About</p></a>
-    <a href=""><p>Profile</p></a>
-    <a href=""><p>Collections</p></a>
+    <a href="">
+      <p>Home</p>
+    </a>
+    <a href="">
+      <p>Winners</p>
+    </a>
+    <a href="">
+      <p>Contact</p>
+    </a>
+    <a href="">
+      <p>About</p>
+    </a>
+    <a href="">
+      <p>Profile</p>
+    </a>
+    <a href="">
+      <p>Collections</p>
+    </a>
   </div>
 </body>
 
