@@ -1,0 +1,43 @@
+{% extends 'app_templates/base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content%}
+<div class="overlay row">
+  <div class="col-md-2"></div>
+<div class="search_results col-md-8 row">
+
+  <h3 class="text-center col-md-10">Search Results:</h3>
+  <a href="{% url 'home'%}" class='col-md-1'>
+    <button class="btn btn-danger ">Home</button>
+  </a>
+  {%if search_trm %}
+  {%if user_profiles%}
+  {% for user in user_profiles%}
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{user.username}}</h5>
+      <p class="card-text">{{user.first_name}} _ {{user.last_name}}</p>
+      <form action="  " method="POST">
+        {%csrf_token%}
+        <input type="hidden" name="strangeid" value='{{user.id}}'>
+        <a href="" class="z-index-1"><button type="submit"
+            class="bg-transparent border-0 bold z-index-2 w-100">See Posts</button></a>
+      </form>
+
+    </div>
+  </div>
+
+  {%endfor%}
+  {%else%}
+  <h4 class="text-center">No Users with username {{search_term}} Found</h4>
+  {%endif%}
+  {%else%}
+  <h4 class="text-center">You did not search anything.</h4>
+  {%endif%}
+</div>
+<div class="col-md-2"></div>
+</div>
+
+{%endblock%}

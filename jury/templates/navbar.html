@@ -30,8 +30,8 @@
     <div class="row navbar2">
       <div class="col-md-4">
         <button class="btn btn-default col-md-2">MENU</button>
-        <form action="" class='inline-form col-md-2'>
-          <input type="text" name="" id="">
+        <form action="{% url 'get_user'%}" class='inline-form col-md-2' method="GET">
+          <input type="text" name="search_term" id="search_form">
           <button type="submit" class="btn btn-outline-success">Search</button>
         </form>
       </div>

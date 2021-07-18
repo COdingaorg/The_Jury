@@ -12,6 +12,10 @@
 
     <form action="{% url 'upload_project' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
+      {% for message in messages%}
+      <p class="alert alert-success">{{message}}</p>
+      {%endfor%}
+      
       {{form.as_p}}
 
       <button type="submit" class="btn btn-success">Post Project</button>
