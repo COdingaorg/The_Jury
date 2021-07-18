@@ -1,10 +1,7 @@
-from typing import Callable
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.expressions import Case
 from tinymce import models as tinymce_models
 from django.db.models.deletion import CASCADE
-import tinymce
 
 # Create your models here.
 class UserProject(models.Model):
@@ -12,7 +9,7 @@ class UserProject(models.Model):
   project_title = models.TextField(max_length=200)
   project_link = models.TextField()
   project_description = tinymce_models.HTMLField()
-  user = models.ForeignKey(User, on_delete=CASCADE)
+  user = models.ForeignKey(User, on_delete=CASCADE, blank=False, default=3)
 
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'user_profiles/')
@@ -21,4 +18,4 @@ class UserProfile(models.Model):
   twitter_account = models.TextField(max_length=100)
   instagram_account = models.TextField(max_length=100)
   user = models.ForeignKey(User, on_delete=CASCADE)
-  projects = models.ForeignKey(UserProject, on_delete= CASCADE)
+  projects = models.ForeignKey(UserProject, on_delete= CASCADE, blank=True, null=True)
