@@ -17,27 +17,27 @@
         <hr>
         <p class='bold'>{{form.username.label}}:</p>
         <p>{{form.username}}</p>
-        {{form.username.errors}}
+        <p class="alert alert-danger">{{form.username.errors}}</p>
 
         <p class='bold'>{{form.first_name.label}}:</p>
         <p>{{form.first_name}}</p>
-        {{form.first_name.errors}}
+        <p class="alert alert-danger">{{form.first_name.errors}}</p>
 
         <p class='bold'>{{form.last_name.label}}:</p>
         <p>{{form.last_name}}</p>
-        {{form.last_name.errors}}
+        <p class="alert alert-danger">{{form.last_name.errors.as_p}}</p>
 
         <p class='bold'>{{form.email.label}}:</p>
         <p>{{form.email}}</p>
-        {{form.email.errors}}
+        <p class="alert alert-danger">{{form.email.errors}}</p>
 
         <p class='bold'>{{form.password1.label}}:</p>
         <p>{{form.password1}}</p>
-        {{form.password.errors}}
+        <p class="alert alert-danger">{{form.password.errors}}</p>
 
         <p class='bold'>{{form.password2.label}}:</p>
         <p>{{form.password2}}</p>
-        {{form.password2.errors}}
+        <p class="alert alert-danger">{{form.password2.errors}}</p>
 
         <button type="submit" name="register_new_user" class="btn btn-success m-5" id="register_new_user">Register</button>
           <p>Already have an Account? </p>

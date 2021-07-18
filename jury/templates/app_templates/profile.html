@@ -7,10 +7,10 @@
 <div class="profile_page row">
   <div class="col-md-2 bg-light"></div>
   <div class="col-md-8 row">
-    <div class="profile_pg col-m-3">
-      <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile">
+    <div class="profile_pg col-m-6">
+      <img src="{{user_profile.photo_path.url}}" alt="profile">
     </div>
-    <div class="user-details col-md-8 d-flex flex-column align-items-center justify-content-start">
+    <div class="user-details col-md-6 d-flex flex-column align-items-center justify-content-start">
       {% for message in messages%}
       <div
         class="alert_window create_account_alert alert alert-warning alert-dismissible fade show z-index-4 position-fixed mt-5">
@@ -43,9 +43,9 @@
       </div>
 
       <div class="names d-flex flex-row align-items-center ">
-        <strong class="ml-auto">{{request.user.first_name}}</strong><strong>{{request.user.last_name}}</strong>
+        <strong class="ml-auto">{{request.user.first_name}}</strong>~<strong>{{request.user.last_name}}</strong>
       </div>
-      <i>{{user_profile.bio}}</i>
+      <i>{{user_profile.user_bio}}</i>
 
     </div>
     <hr>

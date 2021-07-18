@@ -111,9 +111,8 @@ def user_profile(request):
       new_profile.user = request.user
 
       new_profile.save()
-
       try:
-        user_profile = UserProfile.objects.filter(pk = request.user.id).first()
+        user_profile = UserProfile.objects.filter(user = request.user.id).first()
       except UserProfile.DoesNotExist:
         user_profile = None
 
@@ -124,8 +123,7 @@ def user_profile(request):
         }
 
       return render(request,'app_templates/profile.html', context )
-    
-  
+       
   else:
     try:
       user_profile = UserProfile.objects.filter(user = request.user.id).first()
