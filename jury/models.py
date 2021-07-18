@@ -14,6 +14,14 @@ class UserProject(models.Model):
   def __str__(self):
     return self.project_title
 
+  def save_project(self):
+    self.save()
+
+  @classmethod
+  def search_project(cls, search_term):
+    projects = cls.objects.filter(project_title__icontains = search_term )
+    return projects
+
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'user_profiles/')
   user_bio = models.TextField(max_length=200)
