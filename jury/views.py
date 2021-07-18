@@ -1,7 +1,8 @@
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import registerUser, UploadProjectForm
-from .models import User
+from .models import User, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
@@ -44,9 +45,20 @@ def register_user(request):
 def upload_project(request):
   form = UploadProjectForm
   title = 'Submit Project - The Jury'
+  if request.method == 'POST':
+    form = UploadProjectForm(request.POST, request.FILES)
+    if form.is_valid():
+      new_project_item = form.save(commit=False)
+      new_project_item.user = request.user
 
-  context = {
-    'title': title,
-    'form': form,
-  }
-  return render(request, 'app_templates/upload_project.html', context)
+      new_project_item.save()
+      
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+      raise ValueError('Invalid data Entered')
+  else:
+    context = {
+      'title': title,
+      'form': form,
+    }
+    return render(request, 'app_templates/upload_project.html', context)
