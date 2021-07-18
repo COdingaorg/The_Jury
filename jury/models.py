@@ -41,8 +41,17 @@ class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=CASCADE)
   projects = models.ForeignKey(UserProject, on_delete= CASCADE, blank=True, null=True)
 
+  class Meta:
+    ordering = ['-id']
+
   def __str__(self):
     return self.user_bio
   
-  def save_user(self):
+  def save_profile(self):
     self.save()
+
+  @classmethod
+  def get_user_profile(cls, usernm):
+    user_id = (User.objects.get(username = usernm)).id
+    user_profile = cls.objects.filter(user = user_id).first()
+    return user_profile

@@ -33,8 +33,10 @@ class TestUser(TestCase):
     self.assertTrue(user.username == 'Alfred')
 
 class TestUserProject(TestCase):
+  '''
+  Test class to test UserProject methods, save project, search project, update project description and delete project
+  '''
   def setUp(self):
-    self.new_user = User(1, 'Alfred', 'Alfred', 'Tito','tito@gmail.com')
     self.new_user2 = User(1, 'pbkdf2_sha256$260000$kn87lW6tFCXEy2JheYcbc3$zL3x4Qtck9cBeeqnluf75qz7QTY0rDu6bwxzAVJXDFk=', '2021-07-17 22:15:26.357756+03',False,'alfred007','alfred', 'kiko','kiko@gmail.com',False,True,'2021-07-17 21:44:53.340108+03' )
     self.new_user2.save()
 
@@ -70,13 +72,32 @@ class TestUserProject(TestCase):
 
     self.assertTrue(len(projects)==0)
 
+class TestUserProfile(TestCase):
+  '''
+  Test class to test UserProfile methods, save profile, get single profile, update profile bio and delete profile
+  '''
+  def setUp(self):
+    self.new_user2 = User(1, 'pbkdf2_sha256$260000$kn87lW6tFCXEy2JheYcbc3$zL3x4Qtck9cBeeqnluf75qz7QTY0rDu6bwxzAVJXDFk=', '2021-07-17 22:15:26.357756+03',False,'alfred007','alfred', 'kiko','kiko@gmail.com',False,True,'2021-07-17 21:44:53.340108+03' )
+    self.new_user2.save()
 
+    self.new_project = UserProject(1, 'image.png', 'Sauti sol website', 'codinga@sautisol.org', 'A website ...', 1)
+    self.new_project.save_project()
 
-# class TestUserProfile(TestCase):
-#   def setUp(self):
-#     self.new_user = User(username = 'Alfred', first_name = 'Alfred', last_name = 'Tito', email = 'tito@gmail.com')
-#     self.new_user.save()
+    self.new_profile= UserProfile(1, 'image.png', 'Live, love laugh', '@Alfred', '@Alfred', '@Alfred',1,1)
+    
+  def test_instance_creation(self):
+    self.assertTrue(isinstance(self.new_profile, UserProfile))
 
-#     self.new_profile= UserProfile('image.png', 'Live, love laugh', '@Alfred', '@Alfred', '@Alfred',1, )
-#     pass
+  def test_save_profile(self):
+    self.new_profile.save_profile()
+    profile = UserProfile.objects.all()
+
+    self.assertEqual(len(profile), 1)
+
+  def test_get_user_profile(self):
+    self.new_profile.save_profile()
+    usernm = 'alfred007'
+    user_found = UserProfile.get_user_profile(usernm).user.username
+
+    self.assertEqual(user_found, usernm)
     
