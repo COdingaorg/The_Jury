@@ -56,7 +56,7 @@ def upload_project(request):
 
       new_project_item.save()
 
-      messages.success('Post Added Successfully!')
+      messages.success(request, 'Post Added Successfully!')
       
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
@@ -123,14 +123,21 @@ def user_profile(request):
         }
 
       return render(request,'app_templates/profile.html', context )
-       
+
   else:
     try:
       user_profile = UserProfile.objects.filter(user = request.user.id).first()
     except UserProfile.DoesNotExist:
         user_profile = None
+
+    try:
+      user_projects = UserProject.objects.filter(user = request.user.id)
+    except UserProject.DoesNotExist:
+      user_projects = None
+
         
     context = {
+      'user_posts':user_projects,
       'title' :title,
       'form':form,
       'user_profile':user_profile,

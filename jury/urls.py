@@ -1,5 +1,7 @@
 from django.conf.urls import url
+from django.conf.urls.static import static
 from jury import views
+from django.conf import settings
 
 urlpatterns = [
   url(r'^$', views.index, name = 'home'),
@@ -8,3 +10,5 @@ urlpatterns = [
   url(r'^search_user/$', views.get_user, name= 'get_user'),
   url(r'^profile_page/$', views.user_profile, name = 'user_profile'),
 ]
+if settings.DEBUG:
+  urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
