@@ -100,4 +100,19 @@ class TestUserProfile(TestCase):
     user_found = UserProfile.get_user_profile(usernm).user.username
 
     self.assertEqual(user_found, usernm)
+
+  def test_update_bio(self):
+    self.new_profile.save_profile()
+    new_bio = 'make sun shine'
+    UserProfile.update_bio(1, new_bio)
+    UserProfile.objects.get(pk = 1)
+
+    self.assertEqual(UserProfile.objects.get(pk = 1).user_bio, new_bio)
+
+  def test_delete_profile(self):
+    self.new_profile.save_profile()
+    UserProfile.delete_profile(1)
+    profile = UserProfile.objects.all()
+
+    self.assertEqual(len(profile), 0)
     

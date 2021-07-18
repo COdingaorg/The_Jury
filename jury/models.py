@@ -55,3 +55,13 @@ class UserProfile(models.Model):
     user_id = (User.objects.get(username = usernm)).id
     user_profile = cls.objects.filter(user = user_id).first()
     return user_profile
+
+  @classmethod
+  def update_bio(cls, id, new_bio):
+    to_update = UserProfile.objects.filter(pk =id)
+    to_update.update(user_bio = new_bio)
+
+  @classmethod
+  def delete_profile(cls,id):
+    to_delete =cls.objects.get(pk = id)
+    to_delete.delete()
