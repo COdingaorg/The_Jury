@@ -46,7 +46,7 @@
         {% else %}
         <a href="{% url 'login' %}" class="nav-link ml-auto">REGISTER / LOGIN</a>
         {%endif%}
-        <button class="btn btn-success">SUBMIT YOUR PROJECT</button>
+        <a href="{% url 'upload_project' %}"><button class="btn btn-success">SUBMIT YOUR PROJECT</button></a>
       </div>
     </div>
   </div>

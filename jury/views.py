@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from .forms import registerUser
+from .forms import registerUser, UploadProjectForm
 from .models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -37,3 +38,15 @@ def register_user(request):
     'form':form,
   }
   return render(request, 'django_registration/registration_form.html', context)
+
+#A form to submit a users project for rating and reviews
+@login_required(login_url = 'login')
+def upload_project(request):
+  form = UploadProjectForm
+  title = 'Submit Project - The Jury'
+
+  context = {
+    'title': title,
+    'form': form,
+  }
+  return render(request, 'app_templates/upload_project.html', context)
