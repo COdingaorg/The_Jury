@@ -9,9 +9,21 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
   title = 'The Jury-Home'
+  try:
+    user_profile = UserProfile.objects.filter(user = request.user.id).first()
+  except UserProfile.DoesNotExist:
+    user_profile = None
+
+  try:
+    user_projects = UserProject.objects.all()
+  except UserProfile.DoesNotExist:
+    user_projects = None
+
 
   context = {
-    'title':title
+    'user_projects':user_projects,
+    'user_profile':user_profile,
+    'title':title,
   }
   return render(request, 'app_templates/index.html', context)
 

@@ -10,6 +10,8 @@ class UserProject(models.Model):
   project_link = models.CharField(max_length=100)
   project_description = tinymce_models.HTMLField()
   user = models.ForeignKey(User, on_delete=CASCADE, blank=False, default=3)
+  class Meta:
+    ordering = ['-id']
 
   def __str__(self):
     return self.project_title
