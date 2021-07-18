@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import registerUser, UploadProjectForm
+from .forms import registerUser, UploadProjectForm,AddorEditProfile
 from .models import User, UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -95,6 +95,7 @@ def get_user(request):
     return render(request, 'app_templates/search_result.html', context)
 
 #A view function rendering to profile
+@login_required(login_url='login')
 def user_profile(request):
   '''
   View function that displays to profile page
@@ -102,8 +103,39 @@ def user_profile(request):
   result 2- Edits profile
   '''
   title = f'{request.user.username}\'s Profile'
-  context = {
-    'title' :title
-  }
+  form = AddorEditProfile
+  if request.method == 'POST':
+    form = AddorEditProfile(request.POST, request.FILES)
+    if form.is_valid():
+      new_profile = form.save(commit=False)
+      new_profile.user = request.user
 
-  return render(request, 'app_templates/profile.html', context)
+      new_profile.save()
+
+      try:
+        user_profile = UserProfile.objects.filter(pk = request.user.id).first()
+      except UserProfile.DoesNotExist:
+        user_profile = None
+
+      context = {
+        'title' :title,
+        'form':form,
+        'user_profile':user_profile,
+        }
+
+      return render(request,'app_templates/profile.html', context )
+    
+  
+  else:
+    try:
+      user_profile = UserProfile.objects.filter(user = request.user.id).first()
+    except UserProfile.DoesNotExist:
+        user_profile = None
+        
+    context = {
+      'title' :title,
+      'form':form,
+      'user_profile':user_profile,
+      }
+    
+    return render(request, 'app_templates/profile.html', context)

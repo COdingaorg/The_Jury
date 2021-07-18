@@ -35,9 +35,9 @@ class UserProject(models.Model):
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'user_profiles/')
   user_bio = models.TextField(max_length=200)
-  facebook_account = models.TextField(max_length=100)
-  twitter_account = models.TextField(max_length=100)
-  instagram_account = models.TextField(max_length=100)
+  facebook_account = models.CharField(max_length=50)
+  twitter_account = models.CharField(max_length=50)
+  instagram_account = models.CharField(max_length=50)
   user = models.ForeignKey(User, on_delete=CASCADE)
   projects = models.ForeignKey(UserProject, on_delete= CASCADE, blank=True, null=True)
 
