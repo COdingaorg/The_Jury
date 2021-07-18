@@ -25,6 +25,11 @@ class UserProject(models.Model):
   @classmethod
   def update_description(cls, id, new_desc):
     to_update = cls.objects.filter(pk = id).update(project_description = new_desc)
+
+  @classmethod
+  def delete_project(cls, id):
+    to_delete = cls.objects.get(pk = id)
+    to_delete.delete()
     
 
 class UserProfile(models.Model):

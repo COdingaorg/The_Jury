@@ -63,6 +63,12 @@ class TestUserProject(TestCase):
 
     self.assertTrue((UserProject.objects.get(pk = 1)).project_description == new_desc)
 
+  def test_delete_project(self):
+    self.new_project.save_project()
+    UserProject.delete_project(1)
+    projects = UserProject.objects.all()
+
+    self.assertTrue(len(projects)==0)
 
 
 
