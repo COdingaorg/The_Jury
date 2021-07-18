@@ -6,8 +6,8 @@ from django.db.models.deletion import CASCADE
 # Create your models here.
 class UserProject(models.Model):
   project_image = models.ImageField(upload_to = 'projects/')
-  project_title = models.TextField(max_length=200)
-  project_link = models.TextField()
+  project_title = models.CharField(max_length=200)
+  project_link = models.CharField(max_length=100)
   project_description = tinymce_models.HTMLField()
   user = models.ForeignKey(User, on_delete=CASCADE, blank=False, default=3)
 
