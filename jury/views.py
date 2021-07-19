@@ -81,25 +81,37 @@ def upload_project(request):
     return render(request, 'app_templates/upload_project.html', context)
 
 #A search user view function
-def get_user(request):
+def get_project(request):
   '''
   A view fuction responsible for returning searched user
   '''
+  try:
+    user_profile = UserProfile.objects.filter(user = request.user.id).first()
+  except UserProfile.DoesNotExist:
+    user_profile = None
+
   if 'search_term' in request.GET and request.GET['search_term']:
     search_trm = request.GET.get('search_term')
-    user_profiles = User.objects.filter(username__icontains = search_trm)
+    projects = UserProject.objects.filter(project_title__icontains = search_trm)
+
+    try:
+      user_profile = UserProfile.objects.filter(user = request.user.id).first()
+    except UserProfile.DoesNotExist:
+      user_profile = None
 
     context = {
-      'user_profiles':user_profiles,
+      'user_profile':user_profile,
+      'projects':projects,
       'search_trm':search_trm
     }
 
     return render(request, 'app_templates/search_result.html', context)
   
   else:
-    title = 'Search Users'
-    message = 'No Users Found'
+    title = 'Search Projects'
+    message = 'No Projects Found'
     context = {
+      'user_profile':user_profile,
       'message':message,
       'title':title
     }

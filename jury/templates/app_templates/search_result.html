@@ -5,39 +5,53 @@
 {% block content%}
 <div class="overlay row">
   <div class="col-md-2"></div>
-<div class="search_results col-md-8 row">
+  <div class="search_results col-md-8 row">
+    <div class="col-md-12">
+      <h3 class="text-center col-md-10">Search Results:</h3>
+      <a href="{% url 'home'%}" class='col-md-1'>
+        <button class="btn btn-danger ">Home</button>
+      </a>
+    </div>
+    <div class="col-md-12 row d-flex flex-row">
+      {%if search_trm %}
+      {%if projects%}
+      {% for project in projects%}
 
-  <h3 class="text-center col-md-10">Search Results:</h3>
-  <a href="{% url 'home'%}" class='col-md-1'>
-    <button class="btn btn-danger ">Home</button>
-  </a>
-  {%if search_trm %}
-  {%if user_profiles%}
-  {% for user in user_profiles%}
+      <div class="card col-md-3" style="height: 400px;">
+        <div class="card-image">
+          <img src="{{project.project_image.url}}" alt="">
+        </div>
+        <div class="card-title">
+          <h5>{{project.project_name}}</h5>
+        </div>
+        <div class="card-body">
+          {{autoescapeon}}
+          <p class="card-text">{{project.project_description|safe|truncatechars:45}}</p>
+          {{endautoescape}}
+        </div>
+        <div class="card-footer">
+          <form action="  " method="POST">
+            {%csrf_token%}
+            <input type="hidden" name="strangeid" value='{{user.id}}'>
+            <a href="" class="z-index-1">
+              <button type="submit" class="bg-transparent border-0 bold z-index-2 w-100">
+                See Posts
+              </button>
+            </a>
+          </form>
+        </div>
+      </div>
 
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{user.username}}</h5>
-      <p class="card-text">{{user.first_name}} _ {{user.last_name}}</p>
-      <form action="  " method="POST">
-        {%csrf_token%}
-        <input type="hidden" name="strangeid" value='{{user.id}}'>
-        <a href="" class="z-index-1"><button type="submit"
-            class="bg-transparent border-0 bold z-index-2 w-100">See Posts</button></a>
-      </form>
-
+      {%endfor%}
+      {%else%}
+      <h4 class="text-center">No Projects named {{search_trm}} Found</h4>
+      {%endif%}
+      {%else%}
+      <h4 class="text-center">You did not search anything.</h4>
+      {%endif%}
     </div>
   </div>
-
-  {%endfor%}
-  {%else%}
-  <h4 class="text-center">No Users with username {{search_term}} Found</h4>
-  {%endif%}
-  {%else%}
-  <h4 class="text-center">You did not search anything.</h4>
-  {%endif%}
-</div>
-<div class="col-md-2"></div>
+  <div class="col-md-2"></div>
 </div>
 
 {%endblock%}
