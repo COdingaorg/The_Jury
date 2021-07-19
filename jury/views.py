@@ -193,8 +193,11 @@ def single_project(request, project_id):
     user_profile = UserProfile.get_user_profile(request.user.username)
   except UserProfile.DoesNotExist:
     user_profile = None
+  
+  votes = 'votes'
 
   context = {
+    'votes':votes,
     'user_profile':user_profile,
     'title':title,
     'project':project,

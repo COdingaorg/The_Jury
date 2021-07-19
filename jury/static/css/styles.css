@@ -270,3 +270,7 @@ p.project_description{
   height: auto;
   padding: 0%;
 }
+/*styling single image*/
+.one_vote{
+  overflow: hidden;
+}
