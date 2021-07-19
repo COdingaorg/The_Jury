@@ -16,7 +16,7 @@ def index(request):
   '''
   title = 'The Jury-Home'
   try:
-    user_profile = UserProfile.objects.filter(user = request.user.id).first()
+    user_profile = UserProfile.get_user_profile(request.user.username)
   except UserProfile.DoesNotExist:
     user_profile = None
 
@@ -98,21 +98,21 @@ def upload_project(request):
 #A search user view function
 def get_project(request):
   '''
-  A view fuction responsible for returning searched user
+  A view fuction responsible for returning searched project
   '''
   try:
-    user_profile = UserProfile.objects.filter(user = request.user.id).first()
+    user_profile = UserProfile.get_user_profile(request.user.username)
   except UserProfile.DoesNotExist:
     user_profile = None
 
   if 'search_term' in request.GET and request.GET['search_term']:
     search_trm = request.GET.get('search_term')
-    projects = UserProject.objects.filter(project_title__icontains = search_trm)
+    projects = UserProject.search_project(search_trm)
 
-    try:
-      user_profile = UserProfile.objects.filter(user = request.user.id).first()
-    except UserProfile.DoesNotExist:
-      user_profile = None
+  try:
+    user_profile = UserProfile.get_user_profile(request.user.username)
+  except UserProfile.DoesNotExist:
+    user_profile = None
 
     context = {
       'user_profile':user_profile,
@@ -151,7 +151,7 @@ def user_profile(request):
 
       new_profile.save()
       try:
-        user_profile = UserProfile.objects.filter(user = request.user.id).first()
+        user_profile = UserProfile.get_user_profile(request.user.username)
       except UserProfile.DoesNotExist:
         user_profile = None
 
@@ -183,3 +183,20 @@ def user_profile(request):
       }
     
     return render(request, 'app_templates/profile.html', context)
+
+#function that renders single article
+def single_project(request, project_id):
+  project = UserProject.objects.get(id = project_id)
+  project_title = project.project_title
+  title = f'{project_title} page'
+  try:
+    user_profile = UserProfile.get_user_profile(request.user.username)
+  except UserProfile.DoesNotExist:
+    user_profile = None
+
+  context = {
+    'user_profile':user_profile,
+    'title':title,
+    'project':project,
+  }
+  return render(request, 'app_templates/project.html', context)

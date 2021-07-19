@@ -102,7 +102,10 @@
             <p class="alert-danger"> <span>Category</span></p>
       </div>
       <div class="card-footer">
-        <p class="alert-info p-2">BY:{{project.user.username}}</p><span class="p-2 alert-success">share</span>
+        <p class="alert-info p-2">BY:{{project.user.username}}</p> 
+        <a href="{%url 'single_project' {{project.id}} %}">
+          <button class="btn btn-default">Rate Website</button>
+        </a>
       </div>
     </div>
 
