@@ -1,6 +1,7 @@
 {% extends 'app_templates/base.html' %}
 {% load static %}
 {% load bootstrap3 %}
+{% load mathfilters %}
 
 {% block content%}
 <div class="row">
@@ -13,7 +14,7 @@
         {{autoescapeon}}
         <p class="card-text">{{project.project_description|safe}}</p>
         {{endautoescape}}
-        
+
       </div>
       <div class="card-footer p-4">
         <a href="{{project.project_link}}" class="btn btn-outline-success bg-white" target="_blank">Visit Site</a>
@@ -28,32 +29,49 @@
     <div class="votes_title">
       <h3 class="bold bg-white p-3 text-center">User Votes</h3>
     </div>
-    {%if design_votes%}
-    {%for vote in design_votes%}
+    {%if rate_votes%}
+    {%for vote in rate_votes%}
 
-    <div class="one_vote col-md-12 d-flex flex-row align-items-center justify-content-flex-start bg-white">
-      <span class="col-md-2"><img class="user_profile" src="" alt=""></span>
+    <div class="one_vote col-md-12 d-flex flex-row align-items-center justify-content-flex-start bg-white mb-4">
+      <span class="col-md-2"><img class="user_profile" src="{{vote.user.photo_path.url}}" alt="profile"></span>
       <div class="voter_det col-md-5">
         <p>{{vote.user.username}}</p>
-        <p>{{vote.description}}</p>
+        <p>{{vote.score_description}}</p>
       </div>
-      <div class="rates col-md-3">
-        <span class="design">
-          <svg style="width: 40px; height: 40px;">
-            <circle r="19" cy="20" cx="20"
-              style="stroke-dasharray: 119.381; stroke-dashoffset: 0%; fill:white; stroke:black;">90</circle>
-          </svg>
-        </span>
-        <span class="usability">
-          <svg style="width: 40px; height: 40px;">
-            <circle r="19" cy="20" cx="20" style="stroke-dasharray: 119.381; stroke-dashoffset: 35.8142;"></circle>
-          </svg>
-        </span>
-        <span class="content">
-          <svg style="width: 40px; height: 40px;">
-            <circle r="19" cy="20" cx="20" style="stroke-dasharray: 119.381; stroke-dashoffset: 35.8142;"></circle>
-          </svg>
-        </span>
+      <div class="rates col-md-3 p-4">
+        <div class="design" style="margin-bottom: -20px;">
+          <p style="font-size: .8em; margin: -2px; margin-bottom: -2px;">Design:</p>
+          <span class="progress" style="width: 20vw; height: 2vh;">
+            <p class="prog bg-warning" style="height: 100%; 
+                                              color: white;
+                                              font-size: 1.4em;
+                                              padding-left: 4px;
+                                              font-weight: bold;
+                                              width: {{vote.design_rate|mul:10}}%;">{{vote.design_rate|mul:10}}%</p>
+          </span>
+        </div>
+        <div class="usability" style="margin-bottom: -20px;">
+          <p style="font-size: .8em; margin: -2px;">Usability:</p>
+          <span class="progress" style="width: 20vw;height: 2vh;">
+            <p class="prog bg-success" style="height: 100%; 
+                                              color: white;
+                                              font-size: 1.4em;
+                                              padding-left: 4px;
+                                              font-weight: bold;
+                                              width: {{vote.usability_rate|mul:10}}%;">{{vote.usability_rate|mul:10}}%</p>
+          </span>
+        </div>
+        <div class="content" style="margin-bottom: -20px;">
+          <p style="font-size: .8em; margin: -2px;">Content:</p>
+          <span class="progress" style="width: 20vw;height: 2vh;">
+            <p class="prog bg-danger" style="height: 100%; 
+                                              color: white;
+                                              font-size: 1.4em;
+                                              padding-left: 4px;
+                                              font-weight: bold;
+                                              width:{{vote.content_rate|mul:10}}%;">{{vote.content_rate|mul:10}}%</p>
+          </span>
+        </div>
       </div>
       <div class="tot_rate col-md-2">
         <p>234%</p>
@@ -92,8 +110,11 @@
           <p class="title">Applications are rated based on three marks:</p>
           <p>
             <span class="bold">Design</span>-This is the overall appearance of the project<br>
-            <span class="bold">Usability</span> - This can be translated to the user experience and how responsive the project is.<br>
-            <span class="bold">Content</span> - This includes the technologies used, the font used(is it uniform throughout the project) and grammar<hr>
+            <span class="bold">Usability</span> - This can be translated to the user experience and how responsive the
+            project is.<br>
+            <span class="bold">Content</span> - This includes the technologies used, the font used(is it uniform
+            throughout the project) and grammar
+            <hr>
           </p>
           <!--rate website form-->
           <label for="design_rate">How would you Rate the Applications Design:</label><br>
@@ -107,10 +128,7 @@
           8-<input type="radio" name="design" value="8" id="design_rate">|
           9-<input type="radio" name="design" value="9" id="design_rate">|
           10-<input type="radio" name="design" value="10" id="design_rate">|
-
-          <label for="design_rate_desc">What is the reason for the score above:
-            <textarea name="design_rate_desc" id="design_rate_desc" style="font-weight: normal;"></textarea>
-          </label><hr>
+          <hr>
           <!--For usability-->
           <label for="usability_rate">How would you Rate the Applications Usability:</label><br>
           1-<input type="radio" name="usability" value="1" id="usability_rate">|
@@ -124,9 +142,7 @@
           9-<input type="radio" name="usability" value="9" id="usability_rate">|
           10-<input type="radio" name="usability" value="10" id="usability_rate">|
 
-          <label for="usability_rate_desc">What is the reason for the score above:
-            <textarea name="usability_rate_desc" id="usability_rate_desc" style="font-weight: normal;"></textarea>
-          </label><hr>
+          <hr>
           <!--for content-->
           <label for="content_rate">How would you Rate the Applications Content:</label><br>
           1-<input type="radio" name="content" value="1" id="content_rate">|
@@ -140,8 +156,8 @@
           9-<input type="radio" name="content" value="9" id="content_rate">|
           10-<input type="radio" name="content" value="10" id="content_rate">|
 
-          <label for="content_rate_desc">What is the reason for the score above:
-            <textarea name="content_rate_desc" id="content_rate_desc" style="font-weight: normal;"></textarea>
+          <label for="rate_description">What is the reason for the scores above:
+            <textarea name="rate_description" id="rate_description" style="font-weight: normal;"></textarea>
           </label>
 
           <!--end of form -->

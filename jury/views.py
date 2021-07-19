@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import registerUser, UploadProjectForm,AddorEditProfile
-from .models import UserProfile, UserProject
+from .models import ApplicationRating, UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime as dt
@@ -203,27 +203,20 @@ def single_project(request, project_id):
   #voting time
   if request.method == 'POST':
     design_rate = int(request.POST.get('design'))
-    design_rate_desc = request.POST.get('design_rate_desc')
-
     usability_rate = int(request.POST.get('usability'))
-    usability_rate_desc = request.POST.get('usability_rate_desc')
-
     content_rate = int(request.POST.get('content'))
-    content_rate_desc = request.POST.get('content_rate_desc')
+    desc = request.POST.get('rate_description')
     
-    new_design_rate = DesignRating(rate = design_rate, description = design_rate_desc, user = request.user, project = project)
-    new_design_rate.save()
-    new_usability_rate = UsabilityRating(rate = usability_rate, description = usability_rate_desc, user = request.user, project = project)
-    new_usability_rate.save()
-    new_content_rate = ContentRating(rate = content_rate, description = content_rate_desc, user = request.user, project = project)
-    new_content_rate.save()
+    new_rate = ApplicationRating(design_rate = design_rate, usability_rate = usability_rate, content_rate = content_rate, score_description = desc , user = request.user, project = project)
+    new_rate.save()
+   
 
-    return redirect('single_project')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   
-  design_votes = DesignRating.objects.filter(project = project_id   )
+  rate_votes = ApplicationRating.objects.filter(project = project_id)
 
   context = {
-    'design_votes':design_votes,
+    'rate_votes':rate_votes,
     'user_profile':user_profile,
     'title':title,
     'project':project,

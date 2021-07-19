@@ -76,7 +76,7 @@ class ApplicationRating(models.Model):
   usability_rate = models.IntegerField(default=1)
   content_rate = models.IntegerField(default=1)
   score_description = models.TextField(blank=True)
-  user = models.ForeignKey(User, on_delete=CASCADE)
+  user_profile = models.ForeignKey(UserProfile, on_delete=CASCADE, default=3)
   project = models.ForeignKey(UserProject, on_delete=CASCADE)
 
 
