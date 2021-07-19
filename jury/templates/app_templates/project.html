@@ -8,16 +8,17 @@
   <div class="col-md-8">
     <div class="card col-md-12">
       <img src="{{project.project_image.url}}" class="card-img-top" alt="...">
-      <div class="card-body" style="height: auto;">
+      <div class="card-body" style="height: 200px;">
         <h5 class="card-title bold">{{project.project_title}}</h5>
         {{autoescapeon}}
         <p class="card-text">{{project.project_description|safe}}</p>
         {{endautoescape}}
-        <a href="#" class="btn btn-primary">Rate Application</a>
+        
       </div>
       <div class="card-footer p-4">
+        <a href="{{project.project_link}}" class="btn btn-outline-success bg-white" target="_blank">Visit Site</a>
         <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile btn btn-default">
-          Read Website
+          Rate Website
         </button>
       </div>
     </div>
@@ -57,10 +58,11 @@
       <div class="tot_rate col-md-2">
         <p>234%</p>
       </div>
-    </div><hr>
+    </div>
+    <hr>
     {%endfor%}
     {%else%}
-    
+
     <p class="bg-white m-5 text-center p-5">No votes for this Application</p>
     <hr>
     {%endif%}
@@ -86,9 +88,63 @@
       <form action="" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
         <div class="modal-body">
-          <!--Update profile form-->
+          <!--Intro to form rating-->
+          <p class="title">Applications are rated based on three marks:</p>
+          <p>
+            <span class="bold">Design</span>-This is the overall appearance of the project<br>
+            <span class="bold">Usability</span> - This can be translated to the user experience and how responsive the project is.<br>
+            <span class="bold">Content</span> - This includes the technologies used, the font used(is it uniform throughout the project) and grammar<hr>
+          </p>
+          <!--rate website form-->
+          <label for="design_rate">How would you Rate the Applications Design:</label><br>
+          1-<input type="radio" name="design" value="1" id="design_rate">|
+          2-<input type="radio" name="design" value="2" id="design_rate">|
+          3-<input type="radio" name="design" value="3" id="design_rate">|
+          4-<input type="radio" name="design" value="4" id="design_rate">|
+          5-<input type="radio" name="design" value="5" id="design_rate">|
+          6-<input type="radio" name="design" value="6" id="design_rate">|
+          7-<input type="radio" name="design" value="7" id="design_rate">|
+          8-<input type="radio" name="design" value="8" id="design_rate">|
+          9-<input type="radio" name="design" value="9" id="design_rate">|
+          10-<input type="radio" name="design" value="10" id="design_rate">|
 
-          {{form.as_p}}
+          <label for="design_rate_desc">What is the reason for the score above:
+            <textarea name="design_rate_desc" id="design_rate_desc"></textarea>
+          </label><hr>
+          <!--For usability-->
+          <label for="usability_rate">How would you Rate the Applications Usability:</label><br>
+          1-<input type="radio" name="usability" value="1" id="usability_rate">|
+          2-<input type="radio" name="usability" value="2" id="usability_rate">|
+          3-<input type="radio" name="usability" value="3" id="usability_rate">|
+          4-<input type="radio" name="usability" value="4" id="usability_rate">|
+          5-<input type="radio" name="usability" value="5" id="usability_rate">|
+          6-<input type="radio" name="usability" value="6" id="usability_rate">|
+          7-<input type="radio" name="usability" value="7" id="usability_rate">|
+          8-<input type="radio" name="usability" value="8" id="usability_rate">|
+          9-<input type="radio" name="usability" value="9" id="usability_rate">|
+          10-<input type="radio" name="usability" value="10" id="usability_rate">|
+
+          <label for="usability_rate_desc">What is the reason for the score above:
+            <textarea name="usability_rate_desc" id="usability_rate_desc"></textarea>
+          </label><hr>
+          <!--for content-->
+          <label for="content_rate">How would you Rate the Applications Design:</label><br>
+          1-<input type="radio" name="content" value="1" id="content_rate">|
+          2-<input type="radio" name="content" value="2" id="content_rate">|
+          3-<input type="radio" name="content" value="3" id="content_rate">|
+          4-<input type="radio" name="content" value="4" id="content_rate">|
+          5-<input type="radio" name="content" value="5" id="content_rate">|
+          6-<input type="radio" name="content" value="6" id="content_rate">|
+          7-<input type="radio" name="content" value="7" id="content_rate">|
+          8-<input type="radio" name="content" value="8" id="content_rate">|
+          9-<input type="radio" name="content" value="9" id="content_rate">|
+          10-<input type="radio" name="content" value="10" id="content_rate">|
+
+          <label for="content_rate_desc">What is the reason for the score above:
+            <textarea name="content_rate_desc" id="content_rate_desc"></textarea>
+          </label>
+
+
 
           <!--end of form -->
         </div>
