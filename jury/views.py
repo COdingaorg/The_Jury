@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import registerUser, UploadProjectForm,AddorEditProfile
-from .models import User, UserProfile, UserProject
+from .models import ContentRating, DesignRating, UsabilityRating, User, UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime as dt
@@ -185,7 +185,13 @@ def user_profile(request):
     return render(request, 'app_templates/profile.html', context)
 
 #function that renders single article
+@login_required(login_url='login')
 def single_project(request, project_id):
+  '''
+  view function rendering to single project
+  render user profile
+  accepts votes and allocates them
+  '''
   project = UserProject.objects.get(id = project_id)
   project_title = project.project_title
   title = f'{project_title} page'
@@ -193,6 +199,24 @@ def single_project(request, project_id):
     user_profile = UserProfile.get_user_profile(request.user.username)
   except UserProfile.DoesNotExist:
     user_profile = None
+
+  #voting time
+  if request.method == 'POST':
+    design_rate = request.POST.get['design']
+    design_rate_desc = request.POST.get['design_rate_desc']
+
+    usability_rate = request.POST.get['usability']
+    usability_rate_desc = request.POST.get['usability_rate_desc']
+
+    content_rate = request.POST.get['content']
+    content_rate_desc = request.POST.get['content_rate_desc']
+    
+    new_design_rate = DesignRating(rate = design_rate, description = design_rate_desc, user = request.user, project = project)
+    new_design_rate.save()
+    new_usability_rate = UsabilityRating(rate = usability_rate, usability_rate_desc = usability_rate_desc, user = request.user, project = project)
+    new_usability_rate.save()
+    new_content_rate = ContentRating(rate = content_rate, content_rate_desc = content_rate_desc, user = request.user, project = project)
+    new_content_rate.save()
   
   votes = 'votes'
 
