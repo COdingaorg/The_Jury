@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.fields import BigAutoField
 from tinymce import models as tinymce_models
 from django.db.models.deletion import CASCADE
 
@@ -67,3 +68,22 @@ class UserProfile(models.Model):
   def delete_profile(cls,id):
     to_delete =cls.objects.get(pk = id)
     to_delete.delete()
+
+class UsabilityRating(models.Model):
+  rate = models.IntegerField(default=0)
+  description = models.TextField(blank=True)
+  user = models.ForeignKey(User, on_delete=CASCADE)
+  project = models.ForeignKey(UserProject, on_delete=CASCADE)
+
+class DesignRating(models.Model):
+  rate = models.IntegerField(default=0)
+  description = models.TextField(blank=True)
+  user = models.ForeignKey(User, on_delete=CASCADE)
+  project = models.ForeignKey(UserProject, on_delete=CASCADE)
+
+class ContentRating(models.Model):
+  rate = models.IntegerField(default=0)
+  description = models.TextField(blank=True)
+  user = models.ForeignKey(User, on_delete=CASCADE)
+  project = models.ForeignKey(UserProject, on_delete=CASCADE)
+
