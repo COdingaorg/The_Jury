@@ -202,20 +202,20 @@ def single_project(request, project_id):
 
   #voting time
   if request.method == 'POST':
-    design_rate = request.POST.get['design']
-    design_rate_desc = request.POST.get['design_rate_desc']
+    design_rate = request.POST.get('design')
+    design_rate_desc = request.POST.get('design_rate_desc')
 
-    usability_rate = request.POST.get['usability']
-    usability_rate_desc = request.POST.get['usability_rate_desc']
+    usability_rate = request.POST.get('usability')
+    usability_rate_desc = request.POST.get('usability_rate_desc')
 
-    content_rate = request.POST.get['content']
-    content_rate_desc = request.POST.get['content_rate_desc']
+    content_rate = request.POST.get('content')
+    content_rate_desc = request.POST.get('content_rate_desc')
     
     new_design_rate = DesignRating(rate = design_rate, description = design_rate_desc, user = request.user, project = project)
     new_design_rate.save()
-    new_usability_rate = UsabilityRating(rate = usability_rate, usability_rate_desc = usability_rate_desc, user = request.user, project = project)
+    new_usability_rate = UsabilityRating(rate = usability_rate, description = usability_rate_desc, user = request.user, project = project)
     new_usability_rate.save()
-    new_content_rate = ContentRating(rate = content_rate, content_rate_desc = content_rate_desc, user = request.user, project = project)
+    new_content_rate = ContentRating(rate = content_rate, description = content_rate_desc, user = request.user, project = project)
     new_content_rate.save()
   
   votes = 'votes'

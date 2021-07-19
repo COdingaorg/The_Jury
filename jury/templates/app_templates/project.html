@@ -85,7 +85,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{% url 'single_project' %}" method="POST">
+      <form action="{% url 'single_project' project.id %}" method="POST">
         {%csrf_token%}
         <div class="modal-body">
           <!--Intro to form rating-->
@@ -109,7 +109,7 @@
           10-<input type="radio" name="design" value="10" id="design_rate">|
 
           <label for="design_rate_desc">What is the reason for the score above:
-            <textarea name="design_rate_desc" id="design_rate_desc"></textarea>
+            <textarea name="design_rate_desc" id="design_rate_desc" style="font-weight: normal;"></textarea>
           </label><hr>
           <!--For usability-->
           <label for="usability_rate">How would you Rate the Applications Usability:</label><br>
@@ -125,10 +125,10 @@
           10-<input type="radio" name="usability" value="10" id="usability_rate">|
 
           <label for="usability_rate_desc">What is the reason for the score above:
-            <textarea name="usability_rate_desc" id="usability_rate_desc"></textarea>
+            <textarea name="usability_rate_desc" id="usability_rate_desc" style="font-weight: normal;"></textarea>
           </label><hr>
           <!--for content-->
-          <label for="content_rate">How would you Rate the Applications Design:</label><br>
+          <label for="content_rate">How would you Rate the Applications Content:</label><br>
           1-<input type="radio" name="content" value="1" id="content_rate">|
           2-<input type="radio" name="content" value="2" id="content_rate">|
           3-<input type="radio" name="content" value="3" id="content_rate">|
@@ -141,7 +141,7 @@
           10-<input type="radio" name="content" value="10" id="content_rate">|
 
           <label for="content_rate_desc">What is the reason for the score above:
-            <textarea name="content_rate_desc" id="content_rate_desc"></textarea>
+            <textarea name="content_rate_desc" id="content_rate_desc" style="font-weight: normal;"></textarea>
           </label>
 
           <!--end of form -->
