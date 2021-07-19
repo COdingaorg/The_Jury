@@ -79,6 +79,7 @@ def upload_project(request):
     if form.is_valid():
       new_project_item = form.save(commit=False)
       new_project_item.user = request.user
+      new_project_item.created_on = dt.datetime.now()
 
       new_project_item.save()
 
