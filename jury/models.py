@@ -71,21 +71,12 @@ class UserProfile(models.Model):
     to_delete =cls.objects.get(pk = id)
     to_delete.delete()
 
-class UsabilityRating(models.Model):
-  rate = models.IntegerField(default=0)
-  description = models.TextField(blank=True)
+class ApplicationRating(models.Model):
+  design_rate = models.IntegerField(default=1)
+  usability_rate = models.IntegerField(default=1)
+  content_rate = models.IntegerField(default=1)
+  score_description = models.TextField(blank=True)
   user = models.ForeignKey(User, on_delete=CASCADE)
   project = models.ForeignKey(UserProject, on_delete=CASCADE)
 
-class DesignRating(models.Model):
-  rate = models.IntegerField(default=0)
-  description = models.TextField(blank=True)
-  user = models.ForeignKey(User, on_delete=CASCADE)
-  project = models.ForeignKey(UserProject, on_delete=CASCADE)
-
-class ContentRating(models.Model):
-  rate = models.IntegerField(default=0)
-  description = models.TextField(blank=True)
-  user = models.ForeignKey(User, on_delete=CASCADE)
-  project = models.ForeignKey(UserProject, on_delete=CASCADE)
 

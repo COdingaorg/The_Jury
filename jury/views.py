@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import registerUser, UploadProjectForm,AddorEditProfile
-from .models import ContentRating, DesignRating, UsabilityRating, User, UserProfile, UserProject
+from .models import UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime as dt
@@ -202,13 +202,13 @@ def single_project(request, project_id):
 
   #voting time
   if request.method == 'POST':
-    design_rate = request.POST.get('design')
+    design_rate = int(request.POST.get('design'))
     design_rate_desc = request.POST.get('design_rate_desc')
 
-    usability_rate = request.POST.get('usability')
+    usability_rate = int(request.POST.get('usability'))
     usability_rate_desc = request.POST.get('usability_rate_desc')
 
-    content_rate = request.POST.get('content')
+    content_rate = int(request.POST.get('content'))
     content_rate_desc = request.POST.get('content_rate_desc')
     
     new_design_rate = DesignRating(rate = design_rate, description = design_rate_desc, user = request.user, project = project)
@@ -217,11 +217,13 @@ def single_project(request, project_id):
     new_usability_rate.save()
     new_content_rate = ContentRating(rate = content_rate, description = content_rate_desc, user = request.user, project = project)
     new_content_rate.save()
+
+    return redirect('single_project')
   
-  votes = 'votes'
+  design_votes = DesignRating.objects.filter(project = project_id   )
 
   context = {
-    'votes':votes,
+    'design_votes':design_votes,
     'user_profile':user_profile,
     'title':title,
     'project':project,
