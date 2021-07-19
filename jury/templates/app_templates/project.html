@@ -33,9 +33,9 @@
     {%for vote in rate_votes%}
 
     <div class="one_vote col-md-12 d-flex flex-row align-items-center justify-content-flex-start bg-white mb-4">
-      <span class="col-md-2"><img class="user_profile" src="{{vote.user.photo_path.url}}" alt="profile"></span>
+      <span class="col-md-2"><img class="user_profile" src="{{vote.user_profile.photo_path.url}}" alt="profile" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid black; box-shadow: 2px 2px 4px grey;"></span>
       <div class="voter_det col-md-5">
-        <p>{{vote.user.username}}</p>
+        <p class="bold">{{vote.user_profile.user.username}}</p>
         <p>{{vote.score_description}}</p>
       </div>
       <div class="rates col-md-3 p-4">
@@ -69,12 +69,13 @@
                                               font-size: 1.4em;
                                               padding-left: 4px;
                                               font-weight: bold;
+                                              --var
                                               width:{{vote.content_rate|mul:10}}%;">{{vote.content_rate|mul:10}}%</p>
           </span>
         </div>
       </div>
       <div class="tot_rate col-md-2">
-        <p>234%</p>
+        <p>{{vote.content_rate}}|add:{{vote.design_rate}}</p>
       </div>
     </div>
     <hr>

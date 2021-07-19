@@ -1,7 +1,7 @@
+from django.core import validators
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.base import Model
-from django.db.models.fields import BigAutoField
+from django.core.validators import MaxValueValidator, MinValueValidator
 from tinymce import models as tinymce_models
 from django.db.models.deletion import CASCADE
 
@@ -72,9 +72,9 @@ class UserProfile(models.Model):
     to_delete.delete()
 
 class ApplicationRating(models.Model):
-  design_rate = models.IntegerField(default=1)
-  usability_rate = models.IntegerField(default=1)
-  content_rate = models.IntegerField(default=1)
+  design_rate = models.IntegerField(default=1, validators=[MaxValueValidator(100, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
+  usability_rate = models.IntegerField(default=1, validators=[MaxValueValidator(100, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
+  content_rate = models.IntegerField(default=1, validators=[MaxValueValidator(100, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
   score_description = models.TextField(blank=True)
   user_profile = models.ForeignKey(UserProfile, on_delete=CASCADE, default=3)
   project = models.ForeignKey(UserProject, on_delete=CASCADE)
