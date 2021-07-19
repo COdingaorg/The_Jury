@@ -5,9 +5,15 @@ from .forms import registerUser, UploadProjectForm,AddorEditProfile
 from .models import User, UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+import datetime as dt
 
 # Create your views here.
 def index(request):
+  '''
+  Renders user profile
+  Renders projects
+  Renders project of the day
+  '''
   title = 'The Jury-Home'
   try:
     user_profile = UserProfile.objects.filter(user = request.user.id).first()
@@ -19,8 +25,16 @@ def index(request):
   except UserProfile.DoesNotExist:
     user_projects = None
 
+  try:
+    proj_day = UserProject.objects.all().first()
+  except:
+    proj_day = UserProject.objects.get(pk = 4)
+
+  date_today= dt.date.today()
 
   context = {
+    'date_today':date_today,
+    'proj_day':proj_day,
     'user_projects':user_projects,
     'user_profile':user_profile,
     'title':title,
