@@ -18,6 +18,7 @@ A user visits the site.
   |-A user logs out and is redirected to homepage<br>
 
 # Features to add
+Edit and delete Projects
 Jury qualification. A user get more confidence in voting depending on their history in the website
 
 # Output
