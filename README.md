@@ -30,28 +30,30 @@ A users updates bio and profile page
 A user uses the api links provided to get data
 
 # Homepage
-<img src='gallery/static/images/homepage.png' alt='Homepage Slide'>
+<img src='jury/static/images/homepage.png' alt='Homepage Slide'>
+
 
 # Project posts
-<img src='gallery/static/images/user_posts.png' alt='Gallery page'>
+<img src='jury/static/images/homepage2.png' alt='Homepage2'>
 
 # Search results page
-<img src='gallery/static/images/search_results.png' alt='Search Results'>
+<img src='jury/static/images/search_results.png' alt='Search Results'>
 
 # Single Project
-<img src='gallery/static/images/single_image.png' alt='Single Image'>
+<img src='jury/static/images/single_project1.png' alt='project Slide'>
+<img src='jury/static/images/single_project.png' alt='project Slide'>
 
 # user profile
-<img src='gallery/static/images/user_profile.png' alt='Location'>
+<img src='jury/static/images/user_profile.png' alt='user profile'>
 
 # Rating form
-<img src='gallery/static/images/user_profile.png' alt='Location'>
+<img src='jury/static/images/rating_form.png' alt='Rating form'>
 
 # Submit Project form
-<img src='gallery/static/images/user_profile.png' alt='Location'>
+<img src="jury/static/images/upload_project.png" alt='upload project'>
 
 # Users' Votes
-<img src='gallery/static/images/user_profile.png' alt='Location'>
+<img src='jury/static/images/user_votes.png' alt='votes'>
 
 
 # Installation
