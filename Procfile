@@ -1,1 +1,1 @@
-web: gunicorn the_jury.wsgi --log-file-
+web: gunicorn your_project_name.wsgi --log-file -
