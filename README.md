@@ -81,12 +81,12 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 # Website's link
-This aplication is hosted heroku. Website Link is https://
+This aplication is hosted heroku. Website Link is https://thejury.herokuapp.com/
 
 # API Links
 
-User Profiles Link --
-Projects Link --
+User Profiles Link -- https://thejury.herokuapp.com/api/userprofiles/ 
+Projects Link -- https://thejury.herokuapp.com/api/projects/
 
 # License
 This Website uses MIT LICENSE. For more Read License.
