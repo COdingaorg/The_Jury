@@ -208,10 +208,13 @@ def single_project(request, project_id):
     usability_rate = int(request.POST.get('usability'))
     content_rate = int(request.POST.get('content'))
     desc = request.POST.get('rate_description')
-    
-    user_profile = UserProfile.get_user_profile(request.user.username)
-    new_rate = ApplicationRating(design_rate = design_rate, usability_rate = usability_rate, content_rate = content_rate, score_description = desc , user_profile = user_profile, project = project)
-    new_rate.save()
+    if user_profile:
+      new_rate = ApplicationRating(design_rate = design_rate, usability_rate = usability_rate, content_rate = content_rate, score_description = desc , user_profile = user_profile, project = project)
+      new_rate.save()
+    else:
+      messages.warning('You need a Profile to Rate an Application.')
+
+      return redirect('user_profile')
    
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
