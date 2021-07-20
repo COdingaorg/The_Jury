@@ -8,7 +8,7 @@ from .models import ApplicationRating, UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime as dt
-from .serializers import UserProfileSerializer
+from .serializers import UserProfileSerializer, UserProjectSerializer
 from rest_framework.views import APIView
 
 # Create your views here.
@@ -239,5 +239,5 @@ class ProfileList(APIView):
 class ProjectList(APIView):
   def get(self, request, format = None):
     all_projects = UserProject.objects.all()
-    serializers = UserProfileSerializer(all_projects, many=True)
+    serializers = UserProjectSerializer(all_projects, many=True)
     return Response(serializers.data)
