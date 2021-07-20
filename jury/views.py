@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.http.response import Http404
 from django.shortcuts import render, redirect
 from rest_framework import serializers
 from rest_framework.response import Response
@@ -99,7 +100,7 @@ def upload_project(request):
     }
     return render(request, 'app_templates/upload_project.html', context)
 
-#A search user view function
+#A search project view function
 def get_project(request):
   '''
   A view fuction responsible for returning searched project
@@ -109,20 +110,22 @@ def get_project(request):
   except UserProfile.DoesNotExist:
     user_profile = None
 
-  if 'search_term' in request.GET and request.GET['search_term']:
-    search_trm = request.GET.get('search_term')
-    projects = UserProject.search_project(search_trm)
-
   try:
     user_profile = UserProfile.get_user_profile(request.user.username)
   except UserProfile.DoesNotExist:
     user_profile = None
 
+  if 'search_term' in request.GET and request.GET['search_term']:
+    search_term = request.GET.get('search_term')
+    try:
+      projects = UserProject.search_project(search_term)
+    except UserProject.DoesNotExist:
+      projects = None
     context = {
       'user_profile':user_profile,
       'projects':projects,
-      'search_trm':search_trm
-    }
+      'search_trm':search_term,
+      }
 
     return render(request, 'app_templates/search_result.html', context)
   
