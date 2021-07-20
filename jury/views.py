@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.http.response import Http404
 from django.shortcuts import render, redirect
-from rest_framework import serializers
 from rest_framework.response import Response
 from .forms import registerUser, UploadProjectForm,AddorEditProfile
 from .models import ApplicationRating, UserProfile, UserProject
@@ -20,14 +18,10 @@ def index(request):
   Renders project of the day
   '''
   title = 'The Jury-Home'
-  try:
-    user_profile = UserProfile.get_user_profile(request.user.username)
-  except UserProfile.DoesNotExist:
-    user_profile = None
 
   try:
     user_projects = UserProject.objects.all()
-  except UserProfile.DoesNotExist:
+  except UserProject.DoesNotExist:
     user_projects = None
 
   try:
@@ -41,7 +35,6 @@ def index(request):
     'date_today':date_today,
     'proj_day':proj_day,
     'user_projects':user_projects,
-    'user_profile':user_profile,
     'title':title,
   }
   return render(request, 'app_templates/index.html', context)
@@ -101,6 +94,7 @@ def upload_project(request):
     return render(request, 'app_templates/upload_project.html', context)
 
 #A search project view function
+@login_required(login_url = 'login')
 def get_project(request):
   '''
   A view fuction responsible for returning searched project

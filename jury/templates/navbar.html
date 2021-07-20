@@ -40,8 +40,7 @@
       <div class="col-md-4 content_navbar">
         <a class="nav-link dropdown-toggle d-flex flex-row align-items-center" href="#" id="navbarDropdown"
           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="nav_img" src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}"
-            alt="{{request.user}}'s photo">
+    
           <button class="btn btn-outline-success">{{request.user.username}}</button>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
