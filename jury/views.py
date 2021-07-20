@@ -202,22 +202,28 @@ def single_project(request, project_id):
   except UserProfile.DoesNotExist:
     user_profile = None
 
-  #voting time
-  if request.method == 'POST':
-    design_rate = int(request.POST.get('design'))
-    usability_rate = int(request.POST.get('usability'))
-    content_rate = int(request.POST.get('content'))
-    desc = request.POST.get('rate_description')
-    if user_profile:
-      new_rate = ApplicationRating(design_rate = design_rate, usability_rate = usability_rate, content_rate = content_rate, score_description = desc , user_profile = user_profile, project = project)
-      new_rate.save()
-    else:
-      messages.warning('You need a Profile to Rate an Application.')
+  if not user_profile:
+    messages.warning(request,'You need a Profile to Rate an Application.')
 
-      return redirect('user_profile')
-   
+    return redirect('user_profile')
+  else:  
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    #voting time
+    if request.method == 'POST':
+      design_rate = int(request.POST.get('design'))
+      usability_rate = int(request.POST.get('usability'))
+      content_rate = int(request.POST.get('content'))
+      desc = request.POST.get('rate_description')
+      if user_profile:
+        new_rate = ApplicationRating(design_rate = design_rate, usability_rate = usability_rate, content_rate = content_rate, score_description = desc , user_profile = user_profile, project = project)
+        new_rate.save()
+      else:
+        messages.warning(request,'You need a Profile to Rate an Application.')
+
+        return redirect('user_profile')
+      
+
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   
   rate_votes = ApplicationRating.objects.filter(project = project_id)
 
