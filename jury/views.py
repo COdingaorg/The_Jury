@@ -1,12 +1,15 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from rest_framework import serializers
+from rest_framework.response import Response
 from .forms import registerUser, UploadProjectForm,AddorEditProfile
 from .models import ApplicationRating, UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime as dt
-import logging, sys
+from .serializers import UserProfileSerializer
+from rest_framework.views import APIView
 
 # Create your views here.
 def index(request):
@@ -225,3 +228,10 @@ def single_project(request, project_id):
     'project':project,
   }
   return render(request, 'app_templates/project.html', context)
+
+#API VIEW view function
+class ProfileList(APIView):
+  def get(self, request, format = None):
+    all_profiles = UserProfile.objects.all()
+    serializers = UserProfileSerializer(all_profiles, many = True)
+    return Response(serializers.data)
