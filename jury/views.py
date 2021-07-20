@@ -6,6 +6,7 @@ from .models import ApplicationRating, UserProfile, UserProject
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime as dt
+import logging, sys
 
 # Create your views here.
 def index(request):
