@@ -1,0 +1,1 @@
+web: gunicorn the_jury.wsgi --log-file-
