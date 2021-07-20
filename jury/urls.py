@@ -10,6 +10,8 @@ urlpatterns = [
   url(r'^search_user/$', views.get_project, name= 'get_project'),
   url(r'^profile_page/$', views.user_profile, name = 'user_profile'),
   url(r'^project/(\d+)/$', views.single_project, name = 'single_project'),
+  url(r'^api/userprofiles/$', views.ProfileList.as_view()),
+  url(r'^api/projects/$', views.ProjectList.as_view()),
 ]
 if settings.DEBUG:
   urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
