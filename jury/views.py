@@ -191,6 +191,7 @@ def single_project(request, project_id):
   view function rendering to single project
   render user profile
   accepts votes and allocates them
+  randers ratings
   '''
   project = UserProject.objects.get(id = project_id)
   project_title = project.project_title
@@ -207,7 +208,8 @@ def single_project(request, project_id):
     content_rate = int(request.POST.get('content'))
     desc = request.POST.get('rate_description')
     
-    new_rate = ApplicationRating(design_rate = design_rate, usability_rate = usability_rate, content_rate = content_rate, score_description = desc , user = request.user, project = project)
+    user_profile = UserProfile.get_user_profile(request.user.username)
+    new_rate = ApplicationRating(design_rate = design_rate, usability_rate = usability_rate, content_rate = content_rate, score_description = desc , user_profile = user_profile, project = project)
     new_rate.save()
    
 

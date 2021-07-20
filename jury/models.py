@@ -72,9 +72,9 @@ class UserProfile(models.Model):
     to_delete.delete()
 
 class ApplicationRating(models.Model):
-  design_rate = models.IntegerField(default=1, validators=[MaxValueValidator(100, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
-  usability_rate = models.IntegerField(default=1, validators=[MaxValueValidator(100, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
-  content_rate = models.IntegerField(default=1, validators=[MaxValueValidator(100, 'cannot be more than 10'),MinValueValidator(1, 'cannot be less than 1')])
+  design_rate = models.IntegerField(default=1, validators=[MaxValueValidator(10, 'Must be less than or equal 10'),MinValueValidator(1, 'cannot be less than 1')])
+  usability_rate = models.IntegerField(default=1, validators=[MaxValueValidator(10, 'Must be less than or equal 10'),MinValueValidator(1, 'cannot be less than 1')])
+  content_rate = models.IntegerField(default=1, validators=[MaxValueValidator(10, 'Must be less than or equal 10'),MinValueValidator(1, 'cannot be less than 1')])
   score_description = models.TextField(blank=True)
   user_profile = models.ForeignKey(UserProfile, on_delete=CASCADE, default=3)
   project = models.ForeignKey(UserProject, on_delete=CASCADE)

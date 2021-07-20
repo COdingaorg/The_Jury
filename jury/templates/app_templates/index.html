@@ -3,9 +3,6 @@
 {% load bootstrap3 %}
 
 {% block content%}
-
-
-
 <div class="proj-of-day" style="background-image: url('{{proj_day.project_image.url}}');color: white;">
   <div class="overlay2 row">
     <div class="col-md-12 d-flex flex-row align-items-center">
@@ -97,14 +94,14 @@
 
         </p>
       </div>
-      <div class="card-title">
+      <div class="card-title h-auto">
         <p>{{project.project_title}}<p>
             <p class="alert-danger"> <span>Category</span></p>
       </div>
-      <div class="card-footer">
-        <p class="alert alert-success p-2">BY:{{project.user.username}}</p> 
+      <div class="card-footer d-flex">
+        <p class="btn btn-success p-2"><span class="badge badge-light"> {{project.user.username}}</span></p> 
         <a href="{%url 'single_project' project.id %}">
-          <button class="btn btn-default">Rate Website</button>
+          <button class=" btn btn-outline-success bg-white">Open Project</button>
         </a>
       </div>
     </div>

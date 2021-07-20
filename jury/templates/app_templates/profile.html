@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 
 {% block content%}
-<hr>
+
 <div class="profile_page d-flex justify-content-center bg-white p-5 col-md-12 row">
   <div class="col-md-12 row d-flex justify-content-center">
     <div class="profile_pg col-md-6">
@@ -47,6 +47,10 @@
         <strong class="ml-auto">{{request.user.first_name}}</strong>~<strong>{{request.user.last_name}}</strong>
       </div>
       <i>{{user_profile.user_bio}}</i>
+      <a href="mailto:calemasanga@gmail.com" class="bold">Email: {{user_profile.user.email}}</a>
+      <span>facebook:{{user_profile.facebook_account}}</span>
+      <span>Twitter:{{user_profile.twitter_account}}</span>
+      <span>Instagram:{{user_profile.instagram_account}}</span>
 
     </div>
     <hr>

@@ -274,3 +274,13 @@ p.project_description{
 .one_vote{
   overflow: hidden;
 }
+@media screen and (max-width:500px) {
+  .navbar1{
+    display: none;
+  }
+  .nav_img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+}

@@ -7,31 +7,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
-<body id="navbar">
-  <div>
-    <div class="row d-flex align-items-center">
-      <div class="col-md-2 bg-light text-center">
-        <p>ENGLISH</p>
+<body>
+  <div style="position: fixed; width: 100%; top: 0px; z-index: 2; background-color: rgba(230, 230, 250, 1);">
+    <span class="navbar1">
+      <div class="row d-flex align-items-center">
+        <div class="col-md-2 bg-light text-center">
+          <p>ENGLISH</p>
+        </div>
+        <div class="col-md-8 bg-white">
+          <p class="text-center">Get rated By your Peers, Know where you Stand</p>
+        </div>
+        <div class="col-md-2 bg-light" id="social_icons">
+          <span class="facebook_icon"><img src="../static/images/facebook.png" alt="facebook"></span>
+          <span class="instagram_icon"><img src="../static/images/instagram.png" alt="instagram"></span>
+          <span class="twitter_icon"><img src="../static/images/twitter_icon.png" alt="twitter"></span>
+        </div>
       </div>
-      <div class="col-md-8 bg-white">
-        <p class="text-center">Get rated By your Peers, Know where you Stand</p>
-      </div>
-      <div class="col-md-2 bg-light" id="social_icons">
-        <span class="facebook_icon"><img src="../static/images/facebook.png" alt="facebook"></span>
-        <span class="instagram_icon"><img src="../static/images/instagram.png" alt="instagram"></span>
-        <span class="twitter_icon"><img src="../static/images/twitter_icon.png" alt="twitter"></span>
-      </div>
-    </div>
-    <hr>
+    </span>
     <div class="row navbar2">
       <div class="col-md-4">
-        <button class="btn btn-default col-md-2">MENU</button>
         <form action="{% url 'get_project'%}" class='inline-form col-md-2' method="GET">
-          <input type="text" name="search_term" id="search_form">
+          <input type="text" name="search_term" id="search_form" style="width: 150px;">
           <button type="submit" class="btn btn-outline-success">Search</button>
         </form>
       </div>
@@ -60,27 +59,6 @@
         <a href="{% url 'upload_project' %}"><button class="btn btn-success">SUBMIT PROJECT</button></a>
       </div>
     </div>
-  </div>
-
-  <div class="menu_slide">
-    <a href="">
-      <p>Home</p>
-    </a>
-    <a href="">
-      <p>Winners</p>
-    </a>
-    <a href="">
-      <p>Contact</p>
-    </a>
-    <a href="">
-      <p>About</p>
-    </a>
-    <a href="">
-      <p>Profile</p>
-    </a>
-    <a href="">
-      <p>Collections</p>
-    </a>
   </div>
 </body>
 
